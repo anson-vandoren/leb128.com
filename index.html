@@ -13,22 +13,22 @@
             <div class="input-group">
                 <label for="decimal-input">Decimal:</label>
                 <div class="input-wrapper">
-                    <input type="number" id="decimal-input" min="0" step="1" placeholder="Enter decimal number">
-                    <a href="#" id="decimal-copy" class="copy-link">Copy</a>
+                    <input type="number" id="decimal-input" min="0" step="1" placeholder="Enter decimal number" tabindex="1">
+                    <a href="#" id="decimal-copy" class="copy-link" tabindex="-1" aria-label="Copy decimal value">Copy</a>
                 </div>
             </div>
             <div class="input-group">
                 <label for="leb128-input">LEB128:</label>
                 <div class="input-wrapper">
-                    <input type="text" id="leb128-input" placeholder="Enter LEB128 value">
-                    <a href="#" id="leb128-copy" class="copy-link">Copy</a>
+                    <input type="text" id="leb128-input" placeholder="Enter LEB128 value" tabindex="2">
+                    <a href="#" id="leb128-copy" class="copy-link" tabindex="-1" aria-label="Copy LEB128 value">Copy</a>
                 </div>
             </div>
             <div id="error-message" class="error hidden"></div>
         </div>
         <div class="config">
             <label for="output-format">LEB128 Output Format:</label>
-            <select id="output-format">
+            <select id="output-format" tabindex="3">
                 <option value="hex-space">Hex (space-separated)</option>
                 <option value="dec-comma">Decimal (comma-separated)</option>
                 <option value="hex-0x-comma">Hex 0xFF (comma-separated)</option>
@@ -38,9 +38,9 @@
     </main>
     <footer>
         <nav class="bottom-nav">
-            <a href="about.html">ABOUT</a>
-            <a href="https://github.com/yourusername/leb128-converter" target="_blank">GITHUB</a>
-            <a href="https://yourdomain.com" target="_blank">ME</a>
+            <a href="about.html" tabindex="4">ABOUT</a>
+            <a href="https://github.com/yourusername/leb128-converter" target="_blank" tabindex="5">GITHUB</a>
+            <a href="https://yourdomain.com" target="_blank" tabindex="6">ME</a>
         </nav>
     </footer>
     <script src="script.js"></script>

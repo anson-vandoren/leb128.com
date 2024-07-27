@@ -64,10 +64,15 @@ input {
     font-size: 0.9rem;
     color: #435a6b;
     text-decoration: none;
+    cursor: pointer;
 }
 
 .copy-link:hover {
     text-decoration: underline;
+}
+
+.copy-link:focus {
+    outline: none;
 }
 
 .error {
