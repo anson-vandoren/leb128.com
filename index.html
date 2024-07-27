@@ -12,13 +12,17 @@
         <div class="converter">
             <div class="input-group">
                 <label for="decimal-input">Decimal:</label>
-                <input type="number" id="decimal-input" min="0" step="1" placeholder="Enter decimal number">
-                <button id="decimal-copy" class="copy-btn">Copy</button>
+                <div class="input-wrapper">
+                    <input type="number" id="decimal-input" min="0" step="1" placeholder="Enter decimal number">
+                    <a href="#" id="decimal-copy" class="copy-link">Copy</a>
+                </div>
             </div>
             <div class="input-group">
                 <label for="leb128-input">LEB128:</label>
-                <input type="text" id="leb128-input" placeholder="Enter LEB128 value">
-                <button id="leb128-copy" class="copy-btn">Copy</button>
+                <div class="input-wrapper">
+                    <input type="text" id="leb128-input" placeholder="Enter LEB128 value">
+                    <a href="#" id="leb128-copy" class="copy-link">Copy</a>
+                </div>
             </div>
             <div id="error-message" class="error hidden"></div>
         </div>

@@ -117,7 +117,7 @@ outputFormat.addEventListener('change', () => {
     }
 });
 
-// Copy button functionality
+// Copy functionality
 function copyToClipboard(text) {
     navigator.clipboard.writeText(text).then(() => {
         console.log('Copied to clipboard');
@@ -126,8 +126,15 @@ function copyToClipboard(text) {
     });
 }
 
-decimalCopyBtn.addEventListener('click', () => copyToClipboard(decimalInput.value));
-leb128CopyBtn.addEventListener('click', () => copyToClipboard(leb128Input.value));
+decimalCopyLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    copyToClipboard(decimalInput.value);
+});
+
+leb128CopyLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    copyToClipboard(leb128Input.value);
+});
 
 // Save output format preference to local storage
 outputFormat.addEventListener('change', () => {
