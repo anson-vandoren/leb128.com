@@ -47,22 +47,33 @@ function formatLEB128(bytes, format) {
 
 // Parse LEB128 input
 function parseLEB128Input(input) {
-    // Remove all whitespace and split by commas
-    let parts = input.replace(/\s/g, '').split(',');
+    // Remove all whitespace
+    input = input.replace(/\s/g, '');
+    
     let bytes = [];
     
-    for (let part of parts) {
-        if (part.startsWith('0x')) {
-            bytes.push(parseInt(part.slice(2), 16));
-        } else if (/^[0-9]+$/.test(part)) {
-            bytes.push(parseInt(part, 10));
-        } else if (/^[0-9a-fA-F]+$/.test(part)) {
-            // If it's a continuous hex string, split it into bytes
-            for (let i = 0; i < part.length; i += 2) {
-                bytes.push(parseInt(part.slice(i, i + 2), 16));
+    // Check if it's a comma-separated list
+    if (input.includes(',')) {
+        let parts = input.split(',');
+        for (let part of parts) {
+            if (part.startsWith('0x')) {
+                bytes.push(parseInt(part.slice(2), 16));
+            } else if (/^[0-9]+$/.test(part)) {
+                bytes.push(parseInt(part, 10));
+            } else if (/^[0-9a-fA-F]+$/.test(part)) {
+                bytes.push(parseInt(part, 16));
+            } else {
+                throw new Error("Invalid LEB128 input");
             }
-        } else {
-            throw new Error("Invalid LEB128 input");
+        }
+    } else {
+        // Treat as a continuous hex string
+        for (let i = 0; i < input.length; i += 2) {
+            if (i + 1 < input.length) {
+                bytes.push(parseInt(input.slice(i, i + 2), 16));
+            } else {
+                bytes.push(parseInt(input.slice(i), 16));
+            }
         }
     }
     
@@ -98,6 +109,10 @@ decimalInput.addEventListener('input', () => {
 leb128Input.addEventListener('input', () => {
     try {
         errorMessage.classList.add('hidden');
+        if (leb128Input.value.trim() === '') {
+            decimalInput.value = '';
+            return;
+        }
         const leb128 = parseLEB128Input(leb128Input.value);
         const decimal = LEB128ToDecimal(leb128);
         decimalInput.value = decimal;
