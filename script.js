@@ -74,8 +74,8 @@ const decimalInput = document.getElementById('decimal-input');
 const leb128Input = document.getElementById('leb128-input');
 const outputFormat = document.getElementById('output-format');
 const errorMessage = document.getElementById('error-message');
-const decimalCopyBtn = document.getElementById('decimal-copy');
-const leb128CopyBtn = document.getElementById('leb128-copy');
+const decimalCopyLink = document.getElementById('decimal-copy');
+const leb128CopyLink = document.getElementById('leb128-copy');
 
 // Update LEB128 when decimal input changes
 decimalInput.addEventListener('input', () => {
