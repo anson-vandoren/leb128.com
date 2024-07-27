@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decimal to LEB128 Converter</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main role="main">
+        <h1>Decimal to LEB128 Converter</h1>
+        <div class="converter">
+            <div class="input-group">
+                <label for="decimal-input">Decimal:</label>
+                <input type="number" id="decimal-input" min="0" step="1" placeholder="Enter decimal number">
+                <button id="decimal-copy" class="copy-btn">Copy</button>
+            </div>
+            <div class="input-group">
+                <label for="leb128-input">LEB128:</label>
+                <input type="text" id="leb128-input" placeholder="Enter LEB128 value">
+                <button id="leb128-copy" class="copy-btn">Copy</button>
+            </div>
+            <div id="error-message" class="error hidden"></div>
+        </div>
+        <div class="config">
+            <label for="output-format">LEB128 Output Format:</label>
+            <select id="output-format">
+                <option value="hex-space">Hex (space-separated)</option>
+                <option value="dec-comma">Decimal (comma-separated)</option>
+                <option value="hex-0x-comma">Hex 0xFF (comma-separated)</option>
+                <option value="hex-string">Hex string (no separators)</option>
+            </select>
+        </div>
+    </main>
+    <footer>
+        <nav class="bottom-nav">
+            <a href="about.html">ABOUT</a>
+            <a href="https://github.com/yourusername/leb128-converter" target="_blank">GITHUB</a>
+            <a href="https://yourdomain.com" target="_blank">ME</a>
+        </nav>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
