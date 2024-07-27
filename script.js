@@ -106,18 +106,29 @@ decimalInput.addEventListener('input', () => {
 });
 
 // Update decimal when LEB128 input changes
-leb128Input.addEventListener('input', () => {
+leb128Input.addEventListener('input', (e) => {
     try {
         errorMessage.classList.add('hidden');
-        if (leb128Input.value.trim() === '') {
+        let input = e.target.value.replace(/[^0-9a-fA-F,]/g, ''); // Allow only hex digits and commas
+        
+        if (input.trim() === '') {
             decimalInput.value = '';
             return;
         }
-        const leb128 = parseLEB128Input(leb128Input.value);
+
+        // If the last character is a single hex digit, pad it with a leading zero
+        if (!/,$/.test(input) && input.length % 2 !== 0) {
+            input = input.slice(0, -1) + '0' + input.slice(-1);
+        }
+
+        const leb128 = parseLEB128Input(input);
         const decimal = LEB128ToDecimal(leb128);
         decimalInput.value = decimal;
-        // Update LEB128 input to match the current format
-        leb128Input.value = formatLEB128(leb128, outputFormat.value);
+
+        // Only format the input if it's not actively being edited
+        if (e.inputType === 'insertFromPaste' || e.target.value === input) {
+            e.target.value = formatLEB128(leb128, outputFormat.value);
+        }
     } catch (error) {
         errorMessage.textContent = error.message;
         errorMessage.classList.remove('hidden');
