@@ -22,6 +22,9 @@ function LEB128ToDecimal(bytes) {
     let result = 0;
     let shift = 0;
     for (let i = 0; i < bytes.length; i++) {
+        if (i === bytes.length - 1 && (bytes[i] & 0x80) !== 0) {
+            throw new Error("Invalid LEB128 encoding: last byte must not have MSB set");
+        }
         result |= (bytes[i] & 0x7F) << shift;
         if ((bytes[i] & 0x80) === 0) break;
         shift += 7;
@@ -75,6 +78,14 @@ function parseLEB128Input(input) {
                 bytes.push(parseInt(input.slice(i), 16));
             }
         }
+    }
+    
+    // Validate LEB128 encoding
+    if (bytes.length === 0) {
+        throw new Error("Empty LEB128 input");
+    }
+    if ((bytes[bytes.length - 1] & 0x80) !== 0) {
+        throw new Error("Invalid LEB128 encoding: last byte must not have MSB set");
     }
     
     return bytes;
@@ -132,6 +143,7 @@ leb128Input.addEventListener('input', (e) => {
     } catch (error) {
         errorMessage.textContent = error.message;
         errorMessage.classList.remove('hidden');
+        decimalInput.value = '';
     }
 });
 
